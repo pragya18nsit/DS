@@ -26,15 +26,33 @@ int checkifleafNode(struct node* root){
 	return 0;
 }
 
-int countLeaves(struct node* root){
-	if(root == NULL)
-		return NULL;
-	if(root->left == NULL && root->right==NULL)      
-    	return 1;            
-  	else
-    	return countLeaves(root->left)+
-           countLeaves(root->right);  
+//int countLeaves(struct node* root){
+//	if(root == NULL)
+//		return NULL;
+//	if(root->left == NULL && root->right==NULL)      
+//    	return 1;            
+//  	else
+//    	return countLeaves(root->left)+
+//           countLeaves(root->right);  
+//}
+
+bool isLeaf(node* root)
+{
+	return (root->left==NULL && root->right==NULL);
 }
+
+void countLeaves(node* root, int &count)
+{
+	if(root==NULL){
+		return;
+	}
+	if(isLeaf(root)){
+		count++;
+	}
+	countLeaves(root->left, count);
+	countLeaves(root->right, count);
+}
+
 
 void printLeaves(struct node* root){
 	if(root == NULL)
@@ -55,10 +73,11 @@ int main(){
 	root->right->left = createNewNode(6);
 	root->right->right = createNewNode(8);
 	int isleaf = checkifleafNode(root->right->right);
-	int countofleaves = countLeaves(root);
+	int leavesCount = 0;
+	countLeaves(root, leavesCount);
 	cout <<"the given node is  "<< (isleaf ? "" : "not ") << "a leaf node";
 	printf("\n");
-	cout <<"the number of leaf nodes is  "<< countofleaves;
+	cout <<"the number of leaf nodes is  "<< leavesCount;
 	printf("\n");
 	cout <<"the leaf nodes in sequence are  ";
 	printLeaves(root);
