@@ -26,4 +26,6 @@ funcb.apply(obj,['argumentsObj']);
 
 funca.bind(obj)();
 
-
+1.async.parallel and promise.all do the same thing.The only thing is in async.parallel we use
+	an external module
+2.async.each we can pass multiple functions with same name and arguments and execute, in paarallel or waterfall they have to be sepeartae names.
